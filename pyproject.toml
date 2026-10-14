@@ -1,0 +1,81 @@
+[project]
+name = "geosurvey"
+version = "0.1.0"
+description = "Herramientas para cálculos topográficos: nivelación, poligonales y ajuste por mínimos cuadrados."
+authors = [
+    {name = "Moises Elias RC", email = "141798007+Sesiom31@users.noreply.github.com"}
+]
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "pandas (>=3.0.6,<4.0.0)",
+    "numpy (>=2.5.4,<3.0.0)"
+]
+
+[tool.poetry]
+packages = [{include = "geosurvey", from = "src"}]
+
+[tool.poetry.group.dev.dependencies]
+jupyter = "^1.1.1"
+ipykernel = "^7.1.0"
+ruff = "^0.8.0"
+mypy = "^1.13.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+# ==========================================
+# Configuración de Ruff (linter y formateador)
+# ==========================================
+[tool.ruff]
+# Longitud máxima de línea
+line-length = 100
+# Versión de Python objetivo
+target-version = "py314"
+# Excluir directorios
+exclude = [ ".venv", "__pycache__"]
+
+[tool.ruff.lint]
+# Reglas a activar (puedes ampliar según necesidad)
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort (orden de imports)
+    "N",   # pep8-naming
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "SIM", # flake8-simplify
+    "RUF", # reglas específicas de Ruff
+]
+# Ignorar reglas específicas (ejemplo: E501 es ignorado por Ruff cuando usas formatter)
+ignore = [
+    "E501", # line too long (el formatter lo maneja)
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["geosurvey"]
+
+[tool.ruff.format]
+# Estilo de comillas
+quote-style = "double"
+# Indentación con espacios
+indent-style = "space"
+
+# ==========================================
+# Configuración de MyPy (type checker)
+# ==========================================
+[tool.mypy]
+python_version = "3.14"
+# Nivel de rigor
+strict = true
+# Ignorar imports que no tengan stubs
+ignore_missing_imports = true
+# Advertir sobre retornos Any
+warn_return_any = true
+# Advertir sobre configuraciones no usadas
+warn_unused_configs = true
+# Excluir directorios
+exclude = [".venv", "notebooks"]
